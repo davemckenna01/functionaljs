@@ -22,12 +22,13 @@ var safeGet = _.curry(function(x, o) {
     return Maybe(o[x])
 });
 
-$(function(){
+var dave = {name: 'Dave', family: {kev: {name: 'Kev', bday: 'aug 21'}, tom: {name: 'Tom', bday: 'jan 31'}}}
 
+var getKevsBday = compose(chain(safeGet('bday')),chain(safeGet('kev')),safeGet('family'))
 
-console.log('yo');
+console.log(getKevsBday(dave));
 
+var kevsBday = safeGet('family', dave).chain(safeGet('kev')).chain(safeGet('bday'))
 
+console.log(kevsBday);
 
-
-})
